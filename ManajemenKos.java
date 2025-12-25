@@ -76,13 +76,33 @@ public class ManajemenKos {
     }
 
     /*
+     * Mengecek apakah ID kamar sudah terdaftar
+     */
+    static boolean isIdExist(int id) {
+        for (int i = 0; i < n; i++) {
+            if (idKamar[i] == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
      * Menambahkan data kamar baru ke dalam array
      */
     static void tambahKamar() {
         if (n < MAX) {
             System.out.print("Masukkan ID Kamar       : ");
-            idKamar[n] = input.nextInt();
+            int id = input.nextInt();
             input.nextLine();
+
+            // Validasi ID kamar agar tidak duplikat
+            if (isIdExist(id)) {
+                System.out.println(">> ID kamar sudah terdaftar.");
+                return;
+            }
+
+            idKamar[n] = id;
 
             System.out.print("Masukkan Nama Kamar     : ");
             namaKamar[n] = input.nextLine();
